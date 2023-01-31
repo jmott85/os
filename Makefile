@@ -6,6 +6,7 @@ SUFFIX ?=
 STAGES ?= __init__ os pikvm-repo watchdog ro no-audit pikvm __cleanup__
 
 HOSTNAME ?= pikvm
+DHCP ?= yes
 NET_IFACE ?=
 ADDRESS ?=
 GATEWAY ?=
