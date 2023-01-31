@@ -87,6 +87,9 @@ ARG DNS
 ENV DNS $DNS
 RUN if [[ -n "$DNS" && "$NET_IFACE" ]]; then RUN sed -r -i "s/(DNS=).*/\1$DNS/"
 
+ARG DHCP
+ENV DHCP $DHCP
+RUN sed -r -i "s/(DHCP=).*/\1$DHCP/"
 
 ARG ROOT_PASSWD
 ENV ROOT_PASSWD $ROOT_PASSWD
