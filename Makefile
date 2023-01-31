@@ -6,6 +6,12 @@ SUFFIX ?=
 STAGES ?= __init__ os pikvm-repo watchdog ro no-audit pikvm __cleanup__
 
 HOSTNAME ?= pikvm
+NET_IFACE ?=
+ADDRESS ?=
+GATEWAY ?=
+PREFIX ?=
+DNS ?=
+
 LOCALE ?= en_US
 TIMEZONE ?= Europe/Moscow
 #REPO_URL ?= http://mirror.yandex.ru/archlinux-arm
