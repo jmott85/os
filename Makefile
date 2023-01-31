@@ -65,6 +65,11 @@ os: $(_BUILDER_DIR)
 			--build-arg ROOT_PASSWD=$(ROOT_PASSWD) \
 			--build-arg WEBUI_ADMIN_PASSWD=$(WEBUI_ADMIN_PASSWD) \
 			--build-arg IPMI_ADMIN_PASSWD=$(IPMI_ADMIN_PASSWD) \
+			--build-arg NET_IFACE=$(NET_IFACE) \
+			--build-arg ADDRESS=$(ADDRESS) \
+			--build-arg GATEWAY=$(GATEWAY) \
+			--build-arg PREFIX=$(PREFIX) \
+			--build-arg DNS=$(DNS) \
 		' \
 		PROJECT=pikvm-os-$(PLATFORM)$(SUFFIX) \
 		BOARD=$(BOARD) \
