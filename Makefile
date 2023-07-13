@@ -3,7 +3,7 @@
 BOARD ?= rpi4
 PLATFORM ?= v2-hdmi
 SUFFIX ?=
-STAGES ?= __init__ os pikvm-repo watchdog ro no-audit pikvm __cleanup__
+STAGES ?= __init__ os pikvm-repo watchdog rootdelay ro no-audit pikvm __cleanup__
 
 HOSTNAME ?= pikvm
 DHCP ?= yes
@@ -22,6 +22,8 @@ BUILD_OPTS ?=
 ROOT_PASSWD ?= root
 WEBUI_ADMIN_PASSWD ?= admin
 IPMI_ADMIN_PASSWD ?= admin
+
+SUDO ?= sudo
 
 CARD ?= /dev/mmcblk0
 
@@ -120,13 +122,13 @@ _IMAGE_LATEST := $(PLATFORM)-$(BOARD)$(SUFFIX)-latest.img
 image:
 	which xz
 	mkdir -p images
-	sudo bash -x -c ' \
+	$(SUDO) bash -x -c ' \
 		truncate images/$(_IMAGE_DATED) -s 7G \
 		&& device=`losetup --find --show images/$(_IMAGE_DATED)` \
 		&& $(MAKE) install CARD=$$device \
 		&& losetup -d $$device \
 	'
-	sudo chown $(shell id -u):$(shell id -g) images/$(_IMAGE_DATED)
+	$(SUDO) chown $(shell id -u):$(shell id -g) images/$(_IMAGE_DATED)
 	xz -9 --compress images/$(_IMAGE_DATED)
 	sha1sum images/$(_IMAGE_DATED).xz | awk '{print $$1}' > images/$(_IMAGE_DATED).xz.sha1
 	cd images && ln -sf $(_IMAGE_DATED).xz $(_IMAGE_LATEST).xz
